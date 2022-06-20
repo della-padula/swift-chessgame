@@ -13,11 +13,12 @@ enum ChessColor {
 }
 
 protocol ChessPiece {
-    var x: Int { get set }
-    var y: Int { get set }
+    typealias Position = (file: Int, rank: Int)
     
+    var position: Position { get set }
     var initialY: Int { get }
     var chessColor: ChessColor { get set }
+    var symbol: String { get }
     
     func verify(_ position: String) -> Bool
     func availablePositions() -> [String]?
@@ -37,11 +38,11 @@ extension ChessPiece {
         return (x, y)
     }
     
-    func generateStringPosition(xPos: Int, yPos: Int) -> String? {
-        guard !(xPos - 1 < 0) else { return nil }
+    func generateStringPosition(position: Position) -> String? {
+        guard !(position.rank - 1 < 0) else { return nil }
         
-        if let prefixString = (65 + (xPos - 1)).getHorizontalIndexString() {
-            return prefixString + "\(yPos + 1)"
+        if let prefixString = (65 + (position.file - 1)).getHorizontalIndexString() {
+            return prefixString + "\(position.rank + 1)"
         }
         
         return nil
@@ -50,9 +51,9 @@ extension ChessPiece {
 
 extension Int {
     func getHorizontalIndexString() -> String? {
-        guard self > 0 && self < 9 else { return nil }
+        guard self > -1 && self < 8 else { return nil }
         
-        return String(UnicodeScalar(self + 64)!)
+        return String(UnicodeScalar(self + 65)!)
     }
 }
 

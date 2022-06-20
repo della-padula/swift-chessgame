@@ -13,11 +13,17 @@ import Foundation
 // 체스 말 이동하기 (필요 시 상대 말 잡기)
 // 흑, 백 점수 계산
 
+
+
 class Board {
-    var boardPanel: [[ChessPiece?]] = [[ChessPiece?]](repeating: Array(repeating: nil,count: 8), count: 8)
+    static let shared = Board()
+    private init() { }
+    
+    private var boardPanel: [[ChessPiece?]] = [[ChessPiece?]](repeating: Array(repeating: nil,count: 8), count: 8)
     
     func initializeBoard() {
-        boardPanel.removeAll(keepingCapacity: true)
+        boardPanel.removeAll()
+        boardPanel = [[ChessPiece?]](repeating: Array(repeating: nil,count: 8), count: 8)
         
         // Step 1: Set Pawn
         (0..<8).forEach { xOffset in
@@ -25,9 +31,52 @@ class Board {
                 let blackChesePiece: Pawn = .init(chessColor: .black, position: "\(xPosStr)2")
                 let whiteChesePiece: Pawn = .init(chessColor: .white, position: "\(xPosStr)7")
                 
-                boardPanel[xOffset][1] = blackChesePiece
-                boardPanel[xOffset][6] = whiteChesePiece
+                boardPanel[1][xOffset] = blackChesePiece
+                boardPanel[6][xOffset] = whiteChesePiece
             }
+        }
+        
+        // Step 2: Set Bishop
+        [2, 5].forEach { xOffset in
+            if let xPosStr = xOffset.getHorizontalIndexString() {
+                let blackChesePiece: Bishop = .init(chessColor: .black, position: "\(xPosStr)1")
+                let whiteChesePiece: Bishop = .init(chessColor: .white, position: "\(xPosStr)8")
+                
+                boardPanel[0][xOffset] = blackChesePiece
+                boardPanel[7][xOffset] = whiteChesePiece
+            }
+        }
+        
+        // Step 3: Set Luke
+        [0, 7].forEach { xOffset in
+            if let xPosStr = xOffset.getHorizontalIndexString() {
+                let blackChesePiece: Luke = .init(chessColor: .black, position: "\(xPosStr)1")
+                let whiteChesePiece: Luke = .init(chessColor: .white, position: "\(xPosStr)8")
+                
+                boardPanel[0][xOffset] = blackChesePiece
+                boardPanel[7][xOffset] = whiteChesePiece
+            }
+        }
+        
+        // Step 4: Set Knight
+        [1, 6].forEach { xOffset in
+            if let xPosStr = xOffset.getHorizontalIndexString() {
+                let blackChesePiece: Luke = .init(chessColor: .black, position: "\(xPosStr)1")
+                let whiteChesePiece: Luke = .init(chessColor: .white, position: "\(xPosStr)8")
+                
+                boardPanel[0][xOffset] = blackChesePiece
+                boardPanel[7][xOffset] = whiteChesePiece
+            }
+        }
+        
+        // Step 5: Set Queen
+        let queenXOffset = 4
+        if let xPosStr = queenXOffset.getHorizontalIndexString() {
+            let blackChesePiece: Luke = .init(chessColor: .black, position: "\(xPosStr)1")
+            let whiteChesePiece: Luke = .init(chessColor: .white, position: "\(xPosStr)8")
+            
+            boardPanel[0][queenXOffset] = blackChesePiece
+            boardPanel[7][queenXOffset] = whiteChesePiece
         }
     }
     
@@ -35,7 +84,16 @@ class Board {
         
     }
     
-    private func isAvailableToMove() {
+    private func checkMoveAvailable(toPosition: String) {
         
+    }
+    
+    func displayBoard() {
+        boardPanel.forEach { rankBoard in
+            rankBoard.forEach { piece in
+                print("\(piece?.symbol ?? ".") ", terminator: "")
+            }
+            print("")
+        }
     }
 }

@@ -34,6 +34,9 @@
 		B095ED362860536D00D9D44B /* ChessPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = B095ED352860536D00D9D44B /* ChessPiece.swift */; };
 		B095ED372860536D00D9D44B /* ChessPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = B095ED352860536D00D9D44B /* ChessPiece.swift */; };
 		B095ED382860536D00D9D44B /* ChessPiece.swift in Sources */ = {isa = PBXBuildFile; fileRef = B095ED352860536D00D9D44B /* ChessPiece.swift */; };
+		B095ED3A2860707D00D9D44B /* Knight.swift in Sources */ = {isa = PBXBuildFile; fileRef = B095ED392860707D00D9D44B /* Knight.swift */; };
+		B095ED3B2860707D00D9D44B /* Knight.swift in Sources */ = {isa = PBXBuildFile; fileRef = B095ED392860707D00D9D44B /* Knight.swift */; };
+		B095ED3C2860707D00D9D44B /* Knight.swift in Sources */ = {isa = PBXBuildFile; fileRef = B095ED392860707D00D9D44B /* Knight.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +76,7 @@
 		B095ED2B2860532D00D9D44B /* Bishop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bishop.swift; sourceTree = "<group>"; };
 		B095ED2F2860533400D9D44B /* Luke.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Luke.swift; sourceTree = "<group>"; };
 		B095ED352860536D00D9D44B /* ChessPiece.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChessPiece.swift; sourceTree = "<group>"; };
+		B095ED392860707D00D9D44B /* Knight.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Knight.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -161,6 +165,7 @@
 				B095ED2B2860532D00D9D44B /* Bishop.swift */,
 				B095ED2F2860533400D9D44B /* Luke.swift */,
 				B095ED352860536D00D9D44B /* ChessPiece.swift */,
+				B095ED392860707D00D9D44B /* Knight.swift */,
 			);
 			path = ChessPiece;
 			sourceTree = "<group>";
@@ -300,6 +305,7 @@
 				B095ED2C2860532D00D9D44B /* Bishop.swift in Sources */,
 				B095ED362860536D00D9D44B /* ChessPiece.swift in Sources */,
 				B095ECF4286043FF00D9D44B /* ViewController.swift in Sources */,
+				B095ED3A2860707D00D9D44B /* Knight.swift in Sources */,
 				B095ECF0286043FF00D9D44B /* AppDelegate.swift in Sources */,
 				B095ED202860530500D9D44B /* Board.swift in Sources */,
 				B095ED222860530F00D9D44B /* Pawn.swift in Sources */,
@@ -316,6 +322,7 @@
 				B095ED292860531F00D9D44B /* Queen.swift in Sources */,
 				B095ED2D2860532D00D9D44B /* Bishop.swift in Sources */,
 				B095ED312860533400D9D44B /* Luke.swift in Sources */,
+				B095ED3B2860707D00D9D44B /* Knight.swift in Sources */,
 				B095ED232860531300D9D44B /* Board.swift in Sources */,
 				B095ED252860531500D9D44B /* Pawn.swift in Sources */,
 				B095ED072860440000D9D44B /* ChessGameTests.swift in Sources */,
@@ -330,6 +337,7 @@
 				B095ED2A2860531F00D9D44B /* Queen.swift in Sources */,
 				B095ED2E2860532D00D9D44B /* Bishop.swift in Sources */,
 				B095ED132860440000D9D44B /* ChessGameUITestsLaunchTests.swift in Sources */,
+				B095ED3C2860707D00D9D44B /* Knight.swift in Sources */,
 				B095ED322860533400D9D44B /* Luke.swift in Sources */,
 				B095ED242860531300D9D44B /* Board.swift in Sources */,
 				B095ED262860531600D9D44B /* Pawn.swift in Sources */,

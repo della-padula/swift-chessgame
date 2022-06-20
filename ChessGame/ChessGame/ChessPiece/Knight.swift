@@ -1,5 +1,5 @@
 //
-//  Pawn.swift
+//  Knight.swift
 //  ChessGame
 //
 //  Created by denny on 2022/06/20.
@@ -7,13 +7,13 @@
 
 import Foundation
 
-class Pawn: ChessPiece {
+class Knight: ChessPiece {
     var position: Position = (file: 0, rank: 0)
     
     var chessColor: ChessColor
     
     var symbol: String {
-        return chessColor == .black ? "\u{265F}" : "\u{2659}"
+        return chessColor == .black ? "\u{265E}" : "\u{2658}"
     }
     
     var initialY: Int {
