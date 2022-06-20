@@ -84,16 +84,71 @@ class Board {
         
     }
     
-    private func checkMoveAvailable(toPosition: String) {
+    private func checkMoveAvailable(fromPosition: String, toPosition: String) -> Bool {
+        let availablePositions = getAvailablePositions(atPosition: fromPosition)
+        return availablePositions?.count ?? 0 > 0
+    }
+    
+    private func getAvailablePositions(atPosition: String) -> [String]? {
+        let currentPos: Position = atPosition.convertToIntPair()
+        var availablePositions: [String] = []
         
+        if let currentPiece = boardPanel[currentPos.value.rank][currentPos.value.file] {
+            let candidatePositions: [String] = currentPiece.availablePositions() ?? []
+            
+            if currentPiece is Pawn {
+                candidatePositions.forEach { pos in
+                    let posPair: Position = pos.convertToIntPair()
+                    if boardPanel[posPair.value.rank][posPair.value.file] == nil, let posString = posPair.generateStringPosition() {
+                        availablePositions.append(posString)
+                    }
+                }
+                
+                return availablePositions
+            }
+            
+            if currentPiece is Bishop {
+                
+            }
+            
+            if currentPiece is Luke {
+                
+            }
+            
+            if currentPiece is Knight {
+                
+            }
+            
+            if currentPiece is Queen {
+                
+            }
+        }
+        
+        return nil
     }
     
     func displayBoard() {
-        boardPanel.forEach { rankBoard in
+        print("  A B C D E F G H")
+        boardPanel.enumerated().forEach { index, rankBoard in
+            print("\(index + 1)", terminator: " ")
             rankBoard.forEach { piece in
-                print("\(piece?.symbol ?? ".") ", terminator: "")
+                print("\(piece?.symbol ?? ".")", terminator: " ")
             }
             print("")
+        }
+        print("  A B C D E F G H")
+    }
+    
+    func displayAvailablePosition(atPosition: String) {
+        let currentPos: Position = atPosition.convertToIntPair()
+        if boardPanel[currentPos.value.rank][currentPos.value.file] != nil {
+            let availablePositions = getAvailablePositions(atPosition: atPosition)
+            print("Available Positions: ", terminator: "")
+            availablePositions?.forEach { position in
+                print("\(position)", terminator: " ")
+            }
+        } else {
+            print("Invalid Position: No Chess Piece")
         }
     }
 }

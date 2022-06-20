@@ -7,14 +7,20 @@
 
 import Foundation
 
+struct Position {
+    var value: (file: Int, rank: Int)
+    
+    init(file: Int, rank: Int) {
+        self.value = (file, rank)
+    }
+}
+
 enum ChessColor {
     case black
     case white
 }
 
 protocol ChessPiece {
-    typealias Position = (file: Int, rank: Int)
-    
     var position: Position { get set }
     var initialY: Int { get }
     var chessColor: ChessColor { get set }
@@ -30,19 +36,14 @@ extension ChessPiece {
         let predicate = NSPredicate(format:"SELF MATCHES %@", regex)
         return predicate.evaluate(with: position)
     }
-    
-    func convertToIntPair(_ position: String) -> (Int, Int) {
-        let x = String(position.prefix(1)).getHorizontalIndex() ?? 0
-        let y = Int(position.suffix(1)) ?? 1 - 1
+}
+
+extension Position {
+    func generateStringPosition() -> String? {
+        guard !(self.value.file < 0), !(self.value.rank < 0) else { return nil }
         
-        return (x, y)
-    }
-    
-    func generateStringPosition(position: Position) -> String? {
-        guard !(position.rank - 1 < 0) else { return nil }
-        
-        if let prefixString = (65 + (position.file - 1)).getHorizontalIndexString() {
-            return prefixString + "\(position.rank + 1)"
+        if let prefixScalar = UnicodeScalar(65 + self.value.file) {
+            return String(prefixScalar) + "\(self.value.rank + 1)"
         }
         
         return nil
@@ -64,5 +65,11 @@ extension String {
         }
         
         return nil
+    }
+    
+    func convertToIntPair() -> Position {
+        let x = String(self.prefix(1)).getHorizontalIndex() ?? 0
+        let y = (Int(self.suffix(1)) ?? 1) - 1
+        return Position(file: x, rank: y)
     }
 }

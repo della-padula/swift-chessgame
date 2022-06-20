@@ -8,7 +8,7 @@
 import Foundation
 
 class Queen: ChessPiece {
-    var position: Position = (file: 0, rank: 0)
+    var position: Position = Position(file: 0, rank: 0)
     
     var chessColor: ChessColor
     
@@ -23,7 +23,7 @@ class Queen: ChessPiece {
     init(chessColor: ChessColor, position: String) {
         self.chessColor = chessColor
         if verify(position) {
-            let convertedPair = convertToIntPair(position)
+            let convertedPair = position.convertToIntPair()
             self.position = convertedPair
         }
     }
@@ -34,17 +34,17 @@ class Queen: ChessPiece {
         // 우: x + 1, y
         // 하: x, y + 1
         
-        let x = position.file
-        let y = position.rank
+        let x = position.value.file
+        let y = position.value.rank
         
         let xPosArr = [x - 1, x, x + 1, x]
         let yPosArr = [y, y - 1, y, y + 1]
-        let posArr = zip(xPosArr, yPosArr).map{($0.0, $0.1)}
+        let posArr = zip(xPosArr, yPosArr).map{Position(file: $0.0, rank: $0.1)}
         
         var availablePositions: [String] = []
         
         posArr.forEach { arr in
-            if let position = generateStringPosition(position: arr) {
+            if let position = arr.generateStringPosition() {
                 availablePositions.append(position)
             }
         }
