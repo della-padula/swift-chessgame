@@ -108,7 +108,14 @@ class Board {
             }
             
             if currentPiece is Bishop {
+                candidatePositions.forEach { pos in
+                    let posPair: Position = pos.convertToIntPair()
+                    if boardPanel[posPair.value.rank][posPair.value.file] == nil, let posString = posPair.generateStringPosition() {
+                        availablePositions.append(posString)
+                    }
+                }
                 
+                return availablePositions
             }
             
             if currentPiece is Luke {
@@ -143,10 +150,11 @@ class Board {
         let currentPos: Position = atPosition.convertToIntPair()
         if boardPanel[currentPos.value.rank][currentPos.value.file] != nil {
             let availablePositions = getAvailablePositions(atPosition: atPosition)
-            print("Available Positions: ", terminator: "")
+            print("Available Positions of \(atPosition): ", terminator: "[ ")
             availablePositions?.forEach { position in
                 print("\(position)", terminator: " ")
             }
+            print("]")
         } else {
             print("Invalid Position: No Chess Piece")
         }

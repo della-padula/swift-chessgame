@@ -37,8 +37,8 @@ class Queen: ChessPiece {
         let x = position.value.file
         let y = position.value.rank
         
-        let xPosArr = [x - 1, x, x + 1, x]
-        let yPosArr = [y, y - 1, y, y + 1]
+        let xPosArr = [x - chessColor.yOffset, x, x + chessColor.yOffset, x]
+        let yPosArr = [y, y - chessColor.yOffset, y, y + chessColor.yOffset]
         let posArr = zip(xPosArr, yPosArr).map{Position(file: $0.0, rank: $0.1)}
         
         var availablePositions: [String] = []

@@ -18,6 +18,15 @@ struct Position {
 enum ChessColor {
     case black
     case white
+    
+    var yOffset: Int {
+        switch self {
+        case .black:
+            return 1
+        case .white:
+            return -1
+        }
+    }
 }
 
 protocol ChessPiece {
