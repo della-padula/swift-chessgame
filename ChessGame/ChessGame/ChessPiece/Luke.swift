@@ -29,17 +29,35 @@ class Luke: ChessPiece {
     }
     
     func availablePositions() -> [String]? {
-        // 좌: x - 1, y
-        // 우: x + 1, y
-        // 하: x, y + 1
+        // 좌우로만 이동
         
         let x = position.value.file
         let y = position.value.rank
         
-        let xPosArr = [x - 1, x + 1, x]
-        let yPosArr = [y, y, y + 1]
-        let posArr = zip(xPosArr, yPosArr).map{Position(file: $0.0, rank: $0.1)}
+        var xPosArr: [Int] = []
+        var yPosArr: [Int] = []
         
+        (0..<x).enumerated().forEach { idx, value in
+            xPosArr.append(value)
+            yPosArr.append(y)
+        }
+        
+        ((x + 1)..<8).enumerated().forEach { idx, value in
+            xPosArr.append(value)
+            yPosArr.append(y)
+        }
+        
+        (0..<y).enumerated().forEach { idx, value in
+            xPosArr.append(x)
+            yPosArr.append(value)
+        }
+        
+        ((y + 1)..<8).enumerated().forEach { idx, value in
+            xPosArr.append(x)
+            yPosArr.append(value)
+        }
+        
+        let posArr = zip(xPosArr, yPosArr).map{Position(file: $0.0, rank: $0.1)}
         var availablePositions: [String] = []
         
         posArr.forEach { arr in

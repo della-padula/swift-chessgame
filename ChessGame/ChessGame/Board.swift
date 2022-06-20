@@ -119,7 +119,14 @@ class Board {
             }
             
             if currentPiece is Luke {
+                candidatePositions.forEach { pos in
+                    let posPair: Position = pos.convertToIntPair()
+                    if boardPanel[posPair.value.rank][posPair.value.file] == nil, let posString = posPair.generateStringPosition() {
+                        availablePositions.append(posString)
+                    }
+                }
                 
+                return availablePositions
             }
             
             if currentPiece is Knight {
