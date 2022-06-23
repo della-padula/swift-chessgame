@@ -27,10 +27,9 @@ class Board {
     func initializeBoard() {
         // Step 1: Set Pawn
         (0..<8).forEach { xOffset in
-            if let xPosStr = xOffset.getHorizontalIndexString() {
-                let blackChesePiece: Pawn = .init(chessColor: .black, position: "\(xPosStr)2")
-                let whiteChesePiece: Pawn = .init(chessColor: .white, position: "\(xPosStr)7")
-                
+            if let xPosStr = xOffset.getHorizontalIndexString(),
+               let blackChesePiece: Pawn = .init(chessColor: .black, position: "\(xPosStr)2"),
+               let whiteChesePiece: Pawn = .init(chessColor: .white, position: "\(xPosStr)7") {
                 boardPanel[1][xOffset] = blackChesePiece
                 boardPanel[6][xOffset] = whiteChesePiece
             }
@@ -38,10 +37,9 @@ class Board {
         
         // Step 2: Set Bishop
         [2, 5].forEach { xOffset in
-            if let xPosStr = xOffset.getHorizontalIndexString() {
-                let blackChesePiece: Bishop = .init(chessColor: .black, position: "\(xPosStr)1")
-                let whiteChesePiece: Bishop = .init(chessColor: .white, position: "\(xPosStr)8")
-                
+            if let xPosStr = xOffset.getHorizontalIndexString(),
+               let blackChesePiece: Bishop = .init(chessColor: .black, position: "\(xPosStr)1"),
+               let whiteChesePiece: Bishop = .init(chessColor: .white, position: "\(xPosStr)8") {
                 boardPanel[0][xOffset] = blackChesePiece
                 boardPanel[7][xOffset] = whiteChesePiece
             }
@@ -49,10 +47,9 @@ class Board {
         
         // Step 3: Set Luke
         [0, 7].forEach { xOffset in
-            if let xPosStr = xOffset.getHorizontalIndexString() {
-                let blackChesePiece: Luke = .init(chessColor: .black, position: "\(xPosStr)1")
-                let whiteChesePiece: Luke = .init(chessColor: .white, position: "\(xPosStr)8")
-                
+            if let xPosStr = xOffset.getHorizontalIndexString(),
+               let blackChesePiece: Luke = .init(chessColor: .black, position: "\(xPosStr)1"),
+               let whiteChesePiece: Luke = .init(chessColor: .white, position: "\(xPosStr)8") {
                 boardPanel[0][xOffset] = blackChesePiece
                 boardPanel[7][xOffset] = whiteChesePiece
             }
@@ -60,10 +57,9 @@ class Board {
         
         // Step 4: Set Knight
         [1, 6].forEach { xOffset in
-            if let xPosStr = xOffset.getHorizontalIndexString() {
-                let blackChesePiece: Luke = .init(chessColor: .black, position: "\(xPosStr)1")
-                let whiteChesePiece: Luke = .init(chessColor: .white, position: "\(xPosStr)8")
-                
+            if let xPosStr = xOffset.getHorizontalIndexString(),
+               let blackChesePiece: Luke = .init(chessColor: .black, position: "\(xPosStr)1"),
+               let whiteChesePiece: Luke = .init(chessColor: .white, position: "\(xPosStr)8") {
                 boardPanel[0][xOffset] = blackChesePiece
                 boardPanel[7][xOffset] = whiteChesePiece
             }
@@ -71,17 +67,16 @@ class Board {
         
         // Step 5: Set Queen
         let queenXOffset = 4
-        if let xPosStr = queenXOffset.getHorizontalIndexString() {
-            let blackChesePiece: Luke = .init(chessColor: .black, position: "\(xPosStr)1")
-            let whiteChesePiece: Luke = .init(chessColor: .white, position: "\(xPosStr)8")
-            
+        if let xPosStr = queenXOffset.getHorizontalIndexString(),
+           let blackChesePiece: Luke = .init(chessColor: .black, position: "\(xPosStr)1"),
+           let whiteChesePiece: Luke = .init(chessColor: .white, position: "\(xPosStr)8") {
             boardPanel[0][queenXOffset] = blackChesePiece
             boardPanel[7][queenXOffset] = whiteChesePiece
         }
     }
     
     func move(fromPosition: String, toPosition: String) -> Bool {
-        if checkMoveAvailable(fromPosition: fromPosition) {
+        if checkMoveAvailable(fromPosition: fromPosition, toPosition: toPosition) {
             let fromPosition = fromPosition.convertToIntPair()
             let toPosition = toPosition.convertToIntPair()
             
@@ -96,9 +91,9 @@ class Board {
         return false
     }
     
-    private func checkMoveAvailable(fromPosition: String) -> Bool {
+    private func checkMoveAvailable(fromPosition: String, toPosition: String) -> Bool {
         let availablePositions = getAvailablePositions(atPosition: fromPosition)
-        return availablePositions?.count ?? 0 > 0
+        return availablePositions?.count ?? 0 > 0 && (availablePositions?.contains(toPosition) ?? false)
     }
     
     private func getAvailablePositions(atPosition: String) -> [String]? {
@@ -106,7 +101,6 @@ class Board {
         var availablePositions: [String] = []
         if let currentPiece = boardPanel[currentPos.value.rank][currentPos.value.file] {
             let candidatePositions: [String] = currentPiece.availablePositions() ?? []
-            
             if currentPiece is Pawn {
                 candidatePositions.forEach { pos in
                     let posPair: Position = pos.convertToIntPair()

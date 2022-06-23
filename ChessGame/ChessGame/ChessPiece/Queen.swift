@@ -20,12 +20,10 @@ class Queen: ChessPiece {
         return 2
     }
     
-    init(chessColor: ChessColor, position: String) {
+    init?(chessColor: ChessColor, position: String) {
+        guard position.verifyRange() else { return nil }
         self.chessColor = chessColor
-        if position.verifyRange() {
-            let convertedPair = position.convertToIntPair()
-            self.position = convertedPair
-        }
+        self.position = position.convertToIntPair()
     }
     
     func availablePositions() -> [String]? {

@@ -23,6 +23,9 @@ class ViewController: UIViewController {
         
         GameManager.shared.movePiece(from: "B7", to: "B6")
         GameManager.shared.displayCurrentBoard()
+        
+        GameManager.shared.movePiece(from: "B3", to: "B2")
+        GameManager.shared.displayCurrentBoard()
     }
 
 }

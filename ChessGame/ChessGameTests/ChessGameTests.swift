@@ -18,19 +18,22 @@ final class ChessGameTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
+    func testBoard() {
+        Board.shared.resetBoard()
         Board.shared.initializeBoard()
-        Board.shared.displayBoard()
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
-
-    func testChessMove() throws {
         
+        XCTAssertTrue(Board.shared.move(fromPosition: "A2", toPosition: "A3"))
+        XCTAssertTrue(Board.shared.move(fromPosition: "A3", toPosition: "B3"))
+        
+        XCTAssertFalse(Board.shared.move(fromPosition: "B3", toPosition: "B2"))
+        XCTAssertFalse(Board.shared.move(fromPosition: "D7", toPosition: "D8"))
+    }
+    
+    func testChessInit() {
+        XCTAssertNotNil(Pawn(chessColor: .white, position: "A2"))
+        XCTAssertNotNil(Pawn(chessColor: .black, position: "A3"))
+        
+        XCTAssertNil(Pawn(chessColor: .white, position: "A9"))
+        XCTAssertNil(Pawn(chessColor: .white, position: "J1"))
     }
 }
