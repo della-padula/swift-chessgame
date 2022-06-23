@@ -13,18 +13,18 @@ import Foundation
 // 체스 말 이동하기 (필요 시 상대 말 잡기)
 // 흑, 백 점수 계산
 
-
-
 class Board {
     static let shared = Board()
     private init() { }
     
     private var boardPanel: [[ChessPiece?]] = [[ChessPiece?]](repeating: Array(repeating: nil,count: 8), count: 8)
     
-    func initializeBoard() {
+    func resetBoard() {
         boardPanel.removeAll()
         boardPanel = [[ChessPiece?]](repeating: Array(repeating: nil,count: 8), count: 8)
-        
+    }
+    
+    func initializeBoard() {
         // Step 1: Set Pawn
         (0..<8).forEach { xOffset in
             if let xPosStr = xOffset.getHorizontalIndexString() {
@@ -80,11 +80,23 @@ class Board {
         }
     }
     
-    func move(piece: ChessPiece, toPosition: String) {
-        
+    func move(fromPosition: String, toPosition: String) -> Bool {
+        if checkMoveAvailable(fromPosition: fromPosition) {
+            let fromPosition = fromPosition.convertToIntPair()
+            let toPosition = toPosition.convertToIntPair()
+            
+            var fromPiece = boardPanel[fromPosition.value.rank][fromPosition.value.file]
+            fromPiece?.position = toPosition
+            
+            boardPanel[toPosition.value.rank][toPosition.value.file] = fromPiece
+            boardPanel[fromPosition.value.rank][fromPosition.value.file] = nil
+            
+            return true
+        }
+        return false
     }
     
-    private func checkMoveAvailable(fromPosition: String, toPosition: String) -> Bool {
+    private func checkMoveAvailable(fromPosition: String) -> Bool {
         let availablePositions = getAvailablePositions(atPosition: fromPosition)
         return availablePositions?.count ?? 0 > 0
     }
@@ -92,7 +104,6 @@ class Board {
     private func getAvailablePositions(atPosition: String) -> [String]? {
         let currentPos: Position = atPosition.convertToIntPair()
         var availablePositions: [String] = []
-        
         if let currentPiece = boardPanel[currentPos.value.rank][currentPos.value.file] {
             let candidatePositions: [String] = currentPiece.availablePositions() ?? []
             
@@ -143,6 +154,7 @@ class Board {
     
     func displayBoard() {
         print("  A B C D E F G H")
+        
         boardPanel.enumerated().forEach { index, rankBoard in
             print("\(index + 1)", terminator: " ")
             rankBoard.forEach { piece in
@@ -150,6 +162,7 @@ class Board {
             }
             print("")
         }
+        
         print("  A B C D E F G H")
     }
     

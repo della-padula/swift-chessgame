@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B04E543328646F8B0003E58F /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04E543228646F8B0003E58F /* GameManager.swift */; };
+		B04E543428646F8B0003E58F /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04E543228646F8B0003E58F /* GameManager.swift */; };
+		B04E543528646F8B0003E58F /* GameManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B04E543228646F8B0003E58F /* GameManager.swift */; };
+		B04E543628646F920003E58F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05FEDB1286434DD0025A1AA /* Extensions.swift */; };
+		B04E543728646F930003E58F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05FEDB1286434DD0025A1AA /* Extensions.swift */; };
+		B05FEDB2286434DD0025A1AA /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B05FEDB1286434DD0025A1AA /* Extensions.swift */; };
 		B095ECF0286043FF00D9D44B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B095ECEF286043FF00D9D44B /* AppDelegate.swift */; };
 		B095ECF2286043FF00D9D44B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B095ECF1286043FF00D9D44B /* SceneDelegate.swift */; };
 		B095ECF4286043FF00D9D44B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B095ECF3286043FF00D9D44B /* ViewController.swift */; };
@@ -57,6 +63,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B04E543228646F8B0003E58F /* GameManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameManager.swift; sourceTree = "<group>"; };
+		B05FEDB1286434DD0025A1AA /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		B095ECEC286043FF00D9D44B /* ChessGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChessGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B095ECEF286043FF00D9D44B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B095ECF1286043FF00D9D44B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -104,6 +112,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B05FEDB0286434D00025A1AA /* Utility */ = {
+			isa = PBXGroup;
+			children = (
+				B05FEDB1286434DD0025A1AA /* Extensions.swift */,
+			);
+			path = Utility;
+			sourceTree = "<group>";
+		};
 		B095ECE3286043FF00D9D44B = {
 			isa = PBXGroup;
 			children = (
@@ -127,6 +143,7 @@
 		B095ECEE286043FF00D9D44B /* ChessGame */ = {
 			isa = PBXGroup;
 			children = (
+				B05FEDB0286434D00025A1AA /* Utility */,
 				B095ED342860533D00D9D44B /* ChessPiece */,
 				B095ECEF286043FF00D9D44B /* AppDelegate.swift */,
 				B095ECF1286043FF00D9D44B /* SceneDelegate.swift */,
@@ -136,6 +153,7 @@
 				B095ECFA2860440000D9D44B /* LaunchScreen.storyboard */,
 				B095ECFD2860440000D9D44B /* Info.plist */,
 				B095ED1F2860530500D9D44B /* Board.swift */,
+				B04E543228646F8B0003E58F /* GameManager.swift */,
 			);
 			path = ChessGame;
 			sourceTree = "<group>";
@@ -302,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B095ED282860531F00D9D44B /* Queen.swift in Sources */,
+				B04E543328646F8B0003E58F /* GameManager.swift in Sources */,
 				B095ED2C2860532D00D9D44B /* Bishop.swift in Sources */,
 				B095ED362860536D00D9D44B /* ChessPiece.swift in Sources */,
 				B095ECF4286043FF00D9D44B /* ViewController.swift in Sources */,
@@ -310,6 +329,7 @@
 				B095ED202860530500D9D44B /* Board.swift in Sources */,
 				B095ED222860530F00D9D44B /* Pawn.swift in Sources */,
 				B095ED302860533400D9D44B /* Luke.swift in Sources */,
+				B05FEDB2286434DD0025A1AA /* Extensions.swift in Sources */,
 				B095ECF2286043FF00D9D44B /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -319,9 +339,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				B095ED372860536D00D9D44B /* ChessPiece.swift in Sources */,
+				B04E543428646F8B0003E58F /* GameManager.swift in Sources */,
 				B095ED292860531F00D9D44B /* Queen.swift in Sources */,
 				B095ED2D2860532D00D9D44B /* Bishop.swift in Sources */,
 				B095ED312860533400D9D44B /* Luke.swift in Sources */,
+				B04E543728646F930003E58F /* Extensions.swift in Sources */,
 				B095ED3B2860707D00D9D44B /* Knight.swift in Sources */,
 				B095ED232860531300D9D44B /* Board.swift in Sources */,
 				B095ED252860531500D9D44B /* Pawn.swift in Sources */,
@@ -342,6 +364,8 @@
 				B095ED242860531300D9D44B /* Board.swift in Sources */,
 				B095ED262860531600D9D44B /* Pawn.swift in Sources */,
 				B095ED382860536D00D9D44B /* ChessPiece.swift in Sources */,
+				B04E543628646F920003E58F /* Extensions.swift in Sources */,
+				B04E543528646F8B0003E58F /* GameManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

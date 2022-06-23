@@ -22,7 +22,7 @@ class Luke: ChessPiece {
     
     init(chessColor: ChessColor, position: String) {
         self.chessColor = chessColor
-        if verify(position) {
+        if position.verifyRange() {
             let convertedPair = position.convertToIntPair()
             self.position = convertedPair
         }

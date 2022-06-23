@@ -12,12 +12,17 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        Board.shared.initializeBoard()
-        Board.shared.displayBoard()
-        Board.shared.displayAvailablePosition(atPosition: "C1")
-        Board.shared.displayAvailablePosition(atPosition: "C8")
-        Board.shared.displayAvailablePosition(atPosition: "A1")
-        Board.shared.displayAvailablePosition(atPosition: "A8")
+        GameManager.shared.initializeGame()
+        GameManager.shared.displayCurrentBoard()
+        
+        GameManager.shared.movePiece(from: "A2", to: "A3")
+        GameManager.shared.displayCurrentBoard()
+        
+        GameManager.shared.movePiece(from: "A3", to: "B3")
+        GameManager.shared.displayCurrentBoard()
+        
+        GameManager.shared.movePiece(from: "B7", to: "B6")
+        GameManager.shared.displayCurrentBoard()
     }
 
 }

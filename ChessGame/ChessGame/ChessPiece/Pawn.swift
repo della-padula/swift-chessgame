@@ -22,7 +22,7 @@ class Pawn: ChessPiece {
     
     init(chessColor: ChessColor, position: String) {
         self.chessColor = chessColor
-        if verify(position) {
+        if position.verifyRange() {
             let convertedPair = position.convertToIntPair()
             self.position = convertedPair
         }
@@ -41,7 +41,6 @@ class Pawn: ChessPiece {
         let posArr = zip(xPosArr, yPosArr).map{Position(file: $0.0, rank: $0.1)}
         
         var availablePositions: [String] = []
-        
         posArr.forEach { arr in
             if let position = arr.generateStringPosition() {
                 availablePositions.append(position)
