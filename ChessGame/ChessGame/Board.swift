@@ -24,6 +24,10 @@ class Board {
         boardPanel = [[ChessPiece?]](repeating: Array(repeating: nil,count: 8), count: 8)
     }
     
+    func getCurrentBoard() -> [[ChessPiece?]] {
+        return boardPanel
+    }
+    
     func initializeBoard() {
         // Step 1: Set Pawn
         (0..<8).forEach { xOffset in

@@ -31,6 +31,10 @@ class GameManager {
     func displayCurrentBoard() {
         Board.shared.displayBoard()
     }
+    
+    func getCurrentBoard() -> [[ChessPiece?]] {
+        return Board.shared.getCurrentBoard()
+    }
 }
 
 

@@ -43,6 +43,7 @@
 		B095ED3A2860707D00D9D44B /* Knight.swift in Sources */ = {isa = PBXBuildFile; fileRef = B095ED392860707D00D9D44B /* Knight.swift */; };
 		B095ED3B2860707D00D9D44B /* Knight.swift in Sources */ = {isa = PBXBuildFile; fileRef = B095ED392860707D00D9D44B /* Knight.swift */; };
 		B095ED3C2860707D00D9D44B /* Knight.swift in Sources */ = {isa = PBXBuildFile; fileRef = B095ED392860707D00D9D44B /* Knight.swift */; };
+		B0BC5A4B28698CD90001E834 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = B0BC5A4A28698CD90001E834 /* SnapKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0BC5A4B28698CD90001E834 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -204,6 +206,9 @@
 			dependencies = (
 			);
 			name = ChessGame;
+			packageProductDependencies = (
+				B0BC5A4A28698CD90001E834 /* SnapKit */,
+			);
 			productName = ChessGame;
 			productReference = B095ECEC286043FF00D9D44B /* ChessGame.app */;
 			productType = "com.apple.product-type.application";
@@ -276,6 +281,9 @@
 				Base,
 			);
 			mainGroup = B095ECE3286043FF00D9D44B;
+			packageReferences = (
+				B0BC5A4928698CD90001E834 /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = B095ECED286043FF00D9D44B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -525,6 +533,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M79H9K226Y;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChessGame/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -552,6 +561,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M79H9K226Y;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChessGame/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -684,6 +694,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		B0BC5A4928698CD90001E834 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B0BC5A4A28698CD90001E834 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B0BC5A4928698CD90001E834 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = B095ECE4286043FF00D9D44B /* Project object */;
 }
