@@ -15,8 +15,13 @@ class BoardCell: UICollectionViewCell {
     
     var chessPiece: ChessPiece? {
         didSet {
-            positionLabel.text = chessPiece?.position.generateStringPosition()
             chessSymbolLabel.text = chessPiece?.symbol
+        }
+    }
+    
+    var position: Position? {
+        didSet {
+            positionLabel.text = position?.generateStringPosition()
         }
     }
     
@@ -45,9 +50,8 @@ class BoardCell: UICollectionViewCell {
     
     private func setupCellLayout() {
         contentView.addSubview(containerView)
-        containerView.addSubview(labelContainerView)
-        labelContainerView.addSubview(positionLabel)
-        labelContainerView.addSubview(chessSymbolLabel)
+        containerView.addSubview(positionLabel)
+        containerView.addSubview(chessSymbolLabel)
         
         containerView.layer.masksToBounds = true
         containerView.layer.cornerRadius = 4
@@ -57,17 +61,14 @@ class BoardCell: UICollectionViewCell {
             make.edges.equalToSuperview()
         }
         
-        labelContainerView.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-        }
-        
         positionLabel.snp.makeConstraints { make in
-            make.top.leading.trailing.equalToSuperview()
+            make.top.equalToSuperview().inset(2)
+            make.leading.trailing.equalToSuperview()
         }
         
         chessSymbolLabel.snp.makeConstraints { make in
-            make.top.equalTo(positionLabel.snp.bottom)
-            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(positionLabel.snp.bottom).offset(2)
+            make.leading.trailing.equalToSuperview()
         }
     }
 }
@@ -125,6 +126,7 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         let chessPiece = GameManager.shared.getCurrentBoard()[indexPath.row / 8][indexPath.row % 8]
         cell.chessPiece = chessPiece
+        cell.position = Position(file: indexPath.row % 8, rank: indexPath.row / 8)
         return cell
     }
     
@@ -143,5 +145,9 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // Do Nothing
+        let chessPiece = GameManager.shared.getCurrentBoard()[indexPath.row / 8][indexPath.row % 8]
+        let alert = UIAlertController.init(title: "체스 선택됨", message: "\(chessPiece?.position.generateStringPosition() ?? "Invalid Position"), \(chessPiece?.symbol ?? ".")", preferredStyle: .alert)
+        alert.addAction(UIAlertAction.init(title: "확인", style: .default))
+        self.present(alert, animated: true)
     }
 }
