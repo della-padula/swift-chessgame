@@ -100,6 +100,10 @@ class Board {
         return availablePositions?.count ?? 0 > 0 && (availablePositions?.contains(toPosition) ?? false)
     }
     
+    func checkChessExist(position: Position) -> Bool {
+        return boardPanel[position.value.rank][position.value.file] != nil
+    }
+    
     func getAvailablePositions(atPosition: String) -> [String]? {
         let currentPos: Position = atPosition.convertToIntPair()
         var availablePositions: [String] = []

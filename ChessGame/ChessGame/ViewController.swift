@@ -188,15 +188,19 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         let newPosition = Position(file: indexPath.row % 8, rank: indexPath.row / 8)
         print("Selected Position: \(newPosition)")
         
-        if isSelectMode {
-            if prevPosition != newPosition,
-               let prevPosString = prevPosition?.generateStringPosition(),
-               let newPosString = newPosition.generateStringPosition() {
-                GameManager.shared.movePiece(from: prevPosString, to: newPosString)
+        if GameManager.shared.checkChessExist(position: newPosition) {
+            if isSelectMode {
+                if prevPosition != newPosition,
+                   let prevPosString = prevPosition?.generateStringPosition(),
+                   let newPosString = newPosition.generateStringPosition() {
+                    GameManager.shared.movePiece(from: prevPosString, to: newPosString)
+                }
+                prevPosition = nil
+            } else {
+                prevPosition = newPosition
             }
-            prevPosition = nil
         } else {
-            prevPosition = newPosition
+            print("Invalid Position")
         }
     }
 }

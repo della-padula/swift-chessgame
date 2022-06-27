@@ -52,5 +52,9 @@ class GameManager {
     func getAvailablePositions(position: String) -> [Position]? {
         return Board.shared.getAvailablePositions(atPosition: position)?.map { $0.convertToIntPair() }
     }
+    
+    func checkChessExist(position: Position) -> Bool {
+        return Board.shared.checkChessExist(position: position)
+    }
 }
 
