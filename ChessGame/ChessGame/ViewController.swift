@@ -9,9 +9,29 @@ import SnapKit
 import UIKit
 
 class BoardCell: UICollectionViewCell {
+    enum ChessState {
+        case normal
+        case available
+        
+        var bgColor: UIColor {
+            switch self {
+            case .normal:
+                return .systemYellow
+            case .available:
+                return .systemGreen
+            }
+        }
+    }
+    
     static let identifier: String = "BoardCell"
     private let containerView: UIView = UIView()
     private let labelContainerView: UIView = UIView()
+    
+    var state: ChessState = .normal {
+        didSet {
+            containerView.backgroundColor = state.bgColor
+        }
+    }
     
     var chessPiece: ChessPiece? {
         didSet {
@@ -75,6 +95,18 @@ class BoardCell: UICollectionViewCell {
 
 class ViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    private var isSelectMode: Bool {
+        return prevPosition != nil
+    }
+    
+    private var prevPosition: Position? {
+        didSet {
+            boardCollectionView.reloadData()
+        }
+    }
+    
+    private var toPosition: Position?
+    
     private var boardCollectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -93,17 +125,17 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         GameManager.shared.initializeGame()
         GameManager.shared.displayCurrentBoard()
         
-        GameManager.shared.movePiece(from: "A2", to: "A3")
-        GameManager.shared.displayCurrentBoard()
-        
-        GameManager.shared.movePiece(from: "A3", to: "B3")
-        GameManager.shared.displayCurrentBoard()
-        
-        GameManager.shared.movePiece(from: "B7", to: "B6")
-        GameManager.shared.displayCurrentBoard()
-        
-        GameManager.shared.movePiece(from: "B3", to: "B2")
-        GameManager.shared.displayCurrentBoard()
+//        GameManager.shared.movePiece(from: "A2", to: "A3")
+//        GameManager.shared.displayCurrentBoard()
+//
+//        GameManager.shared.movePiece(from: "A3", to: "B3")
+//        GameManager.shared.displayCurrentBoard()
+//
+//        GameManager.shared.movePiece(from: "B7", to: "B6")
+//        GameManager.shared.displayCurrentBoard()
+//
+//        GameManager.shared.movePiece(from: "B3", to: "B2")
+//        GameManager.shared.displayCurrentBoard()
         boardCollectionView.reloadData()
     }
     
@@ -125,8 +157,17 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
         }
         
         let chessPiece = GameManager.shared.getCurrentBoard()[indexPath.row / 8][indexPath.row % 8]
+        let curPosition = Position(file: indexPath.row % 8, rank: indexPath.row / 8)
         cell.chessPiece = chessPiece
-        cell.position = Position(file: indexPath.row % 8, rank: indexPath.row / 8)
+        cell.position = curPosition
+        
+        if isSelectMode, let prev = prevPosition, let prevString = prev.generateStringPosition() {
+            let availablePositions = GameManager.shared.getAvailablePositions(position: prevString)
+            cell.state = ((curPosition != prev) && (availablePositions?.contains(curPosition) ?? false)) ? .available : .normal
+        } else {
+            cell.state = .normal
+        }
+        
         return cell
     }
     
@@ -144,10 +185,18 @@ class ViewController: UIViewController, UICollectionViewDelegate, UICollectionVi
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // Do Nothing
-        let chessPiece = GameManager.shared.getCurrentBoard()[indexPath.row / 8][indexPath.row % 8]
-        let alert = UIAlertController.init(title: "체스 선택됨", message: "\(chessPiece?.position.generateStringPosition() ?? "Invalid Position"), \(chessPiece?.symbol ?? ".")", preferredStyle: .alert)
-        alert.addAction(UIAlertAction.init(title: "확인", style: .default))
-        self.present(alert, animated: true)
+        let newPosition = Position(file: indexPath.row % 8, rank: indexPath.row / 8)
+        print("Selected Position: \(newPosition)")
+        
+        if isSelectMode {
+            if prevPosition != newPosition,
+               let prevPosString = prevPosition?.generateStringPosition(),
+               let newPosString = newPosition.generateStringPosition() {
+                GameManager.shared.movePiece(from: prevPosString, to: newPosString)
+            }
+            prevPosition = nil
+        } else {
+            prevPosition = newPosition
+        }
     }
 }

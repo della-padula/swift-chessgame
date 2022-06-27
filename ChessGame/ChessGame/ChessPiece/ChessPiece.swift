@@ -7,11 +7,15 @@
 
 import Foundation
 
-struct Position {
+struct Position: Equatable {
     var value: (file: Int, rank: Int)
     
     init(file: Int, rank: Int) {
         self.value = (file, rank)
+    }
+    
+    static func == (lhs: Position, rhs: Position) -> Bool {
+        return (lhs.value.file == rhs.value.file) && (lhs.value.rank == rhs.value.rank)
     }
 }
 

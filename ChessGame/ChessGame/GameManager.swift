@@ -11,7 +11,16 @@ class GameManager {
     static let shared = GameManager()
     private init() { }
     
+    private var whiteScore: Int = 0
+    private var blackScore: Int = 0
+    
+    var currentTurn: ChessColor = .black
+    
     func initializeGame() {
+        whiteScore = 0
+        blackScore = 0
+        currentTurn = .black
+        
         Board.shared.resetBoard()
         Board.shared.initializeBoard()
     }
@@ -28,6 +37,10 @@ class GameManager {
         }
     }
     
+    func updateScore() {
+        
+    }
+    
     func displayCurrentBoard() {
         Board.shared.displayBoard()
     }
@@ -35,7 +48,9 @@ class GameManager {
     func getCurrentBoard() -> [[ChessPiece?]] {
         return Board.shared.getCurrentBoard()
     }
+    
+    func getAvailablePositions(position: String) -> [Position]? {
+        return Board.shared.getAvailablePositions(atPosition: position)?.map { $0.convertToIntPair() }
+    }
 }
-
-
 

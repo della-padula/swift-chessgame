@@ -100,7 +100,7 @@ class Board {
         return availablePositions?.count ?? 0 > 0 && (availablePositions?.contains(toPosition) ?? false)
     }
     
-    private func getAvailablePositions(atPosition: String) -> [String]? {
+    func getAvailablePositions(atPosition: String) -> [String]? {
         let currentPos: Position = atPosition.convertToIntPair()
         var availablePositions: [String] = []
         if let currentPiece = boardPanel[currentPos.value.rank][currentPos.value.file] {

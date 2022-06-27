@@ -36,7 +36,9 @@ class Pawn: ChessPiece {
         
         let xPosArr = [x - chessColor.yOffset, x + chessColor.yOffset, x]
         let yPosArr = [y, y, y + chessColor.yOffset]
-        let posArr = zip(xPosArr, yPosArr).map{Position(file: $0.0, rank: $0.1)}
+        
+        let numRange = 0...7
+        let posArr = zip(xPosArr, yPosArr).map{Position(file: $0.0, rank: $0.1)}.filter{numRange.contains($0.value.file) && numRange.contains($0.value.rank)}
         
         var availablePositions: [String] = []
         posArr.forEach { arr in
